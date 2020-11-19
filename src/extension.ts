@@ -22,7 +22,13 @@ export class MyTaskProvider implements vscode.TaskProvider {
 		];
 	}
 
-	resolveTask(_: vscode.Task): vscode.Task | undefined {
+	resolveTask(task: vscode.Task): vscode.Task | undefined {
+		const problemMatchers = task.problemMatchers as any;
+		vscode.window.showInformationMessage('problemMatchers: ' + (
+			problemMatchers === undefined ? 'undefined'
+			: Array.isArray(problemMatchers) ? '[' + problemMatchers.join(', ') + ']'
+			: problemMatchers.toString()
+		));
 		return undefined;
 	}
 }
